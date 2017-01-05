@@ -1,0 +1,10 @@
+---
+- name: writing system environment variables on /etc/environment
+  lineinfile:
+    dest: /etc/environment
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }}={{ item.value }}"
+  with_dict: "{{ sys_env_vars }}"
+  become: yes
+  tags:
+    - sys_env_vars
